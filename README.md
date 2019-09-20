@@ -1,4 +1,4 @@
-# creations
+# Study Projects
 
 Hello!
 
