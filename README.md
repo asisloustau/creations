@@ -1,6 +1,6 @@
-# Study Projects
+# Portfolio Projects
 
 Hello!
 
-I am excited to join this community and to start developing software. 
-I am a civil engineer who wants to switch careers to the software development world. I always loved programming and creating!
+I am excited to join this community and participate in data science projects that will cause an impact in society. 
+I am a civil engineer who loves learning and understanding, as well as applying my common sense to solve problems.
