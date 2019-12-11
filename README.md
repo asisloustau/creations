@@ -6,6 +6,8 @@ I am excited to be part of the Github community and participate in data science 
 
 In this repository I will be uploading some of my data science and machine learning projects:
 
+## Project: Handwritten Digits Classifier
+Machine learning, neural networks
 ## Project: Loan Repayment Predictor
 Data cleaning, machine learning
 ## Project: Predicting Bike Rentals
