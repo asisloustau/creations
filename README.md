@@ -22,5 +22,5 @@ Machine learning
 Machine learning
 ## [Project: Star Wars Survey Analysis](https://github.com/asisloustau/portfolio_projects/blob/master/star_wars/star_wars_analysis.ipynb)
 Data cleaning, data visualization
-## Project: Predicting Hacker News Upvotes
+## [Project: Predicting Hacker News Upvotes](https://github.com/asisloustau/portfolio_projects/blob/master/natural_language_processing_predicting_upvotes/predicting_upvotes.ipynb)
 Natural language processing, machine learning
