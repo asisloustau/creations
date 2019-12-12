@@ -10,6 +10,8 @@ In this repository I will be uploading some of my data science and machine learn
 Machine learning, neural networks
 ## [Project: Loan Repayment Predictor](https://github.com/asisloustau/portfolio_projects/blob/master/loan_payment_predictor/loan_payment_predictor.ipynb)
 Data cleaning, machine learning
+## [Project: Predicting Hacker News Upvotes](https://github.com/asisloustau/portfolio_projects/blob/master/natural_language_processing_predicting_upvotes/predicting_upvotes.ipynb)
+Natural language processing, machine learning
 ## [Project: Predicting Bike Rentals](https://github.com/asisloustau/portfolio_projects/blob/master/predicting_bike_rentals/predicting_bike_rentals.ipynb)
 Data cleaning, machine learning
 ## [Project: Predicting House Prices](https://github.com/asisloustau/portfolio_projects/blob/master/LR_predicting_house_sale_prices/LR_house_prices.ipynb)
@@ -22,5 +24,3 @@ Machine learning
 Machine learning
 ## [Project: Star Wars Survey Analysis](https://github.com/asisloustau/portfolio_projects/blob/master/star_wars/star_wars_analysis.ipynb)
 Data cleaning, data visualization
-## [Project: Predicting Hacker News Upvotes](https://github.com/asisloustau/portfolio_projects/blob/master/natural_language_processing_predicting_upvotes/predicting_upvotes.ipynb)
-Natural language processing, machine learning
