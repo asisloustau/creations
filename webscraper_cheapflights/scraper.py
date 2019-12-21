@@ -16,18 +16,21 @@ from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 # missing: email management,
 
-### to-do:create pseudocode for functions
+### Functions
 
-def search_flights():
+def search_flights(): # this function is very long. See how to optimize it.
+    ### To be added - flights back to departure (roundtrip)
     '''
     This function will take care of the input values for the website and click search
     '''
-    from_city = "LAX"
-    to_city = "Madrid"
-    date_from = "Jun 9" # we can also use datetime format and convert to this type, this is what Google Flights uses
-    date_to = "Jun 21"
 
-    # add: connect using proxy 
+    ### Input
+    ## To-Do here: 
+    # Save date_from and date_to as datetime format - we can create a list with +- x days and different destinations to submit more than one request
+    from_city = "LAX"
+    to_city = "Berlin"
+    date_from = "Jun 9" # we can also use datetime format and convert to this type, this is what Google Flights uses
+    date_to = "Jun 14"
  
     sleep(2)
     ### example of first input: from field
@@ -55,7 +58,6 @@ def search_flights():
     to_input_2.send_keys(Keys.TAB) # skips to date_from
 
     ### date_from
-
     date_from_xpath_2 = "/html/body/div[2]/div[2]/div/div[2]/div[3]/div/jsl/div/div[5]/div/div[4]/div[2]/div[1]/date-input/input"
     sleep(1)
     date_from_input_2 = driver.find_element_by_xpath(date_from_xpath_2)
@@ -66,7 +68,6 @@ def search_flights():
     date_from_input_2.send_keys(Keys.TAB) # skips to date_to
 
     ### date_to
-
     sleep(randint(1,4))
     date_to_xpath_2 = "/html/body/div[2]/div[2]/div/div[2]/div[3]/div/jsl/div/div[5]/div/div[4]/div[2]/div[3]/date-input/input"
     date_to_input_2 = driver.find_element_by_xpath(date_to_xpath_2)
@@ -88,28 +89,56 @@ def search_flights():
     sort_by_price_xpath = "/html/body/div[2]/div[2]/div/div[2]/div[3]/div/jsl/div/div[2]/main[4]/div[7]/div[1]/div[5]/div[1]/div/div/dropdown-menu/div/div[2]/menu-item[2]"
     driver.find_element_by_xpath(sort_by_price_xpath).click()
     sleep(10) # sleep a couple of seconds between each input
-    
 
 def scrape_flights():
     '''
-    This functin will scrape the data from the website and create a DataFrame with the content
+    This function will scrape the data from the website and create a DataFrame with the content
     '''
-    # TO-DO: sort by cheapest -dropdown: use XPATH /html/body/div[2]/div[2]/div/div[2]/div[3]/div/jsl/div/div[2]/main[4]/div[7]/div[1]/div[5]/div[1]/div/div/dropdown-menu/div/div[1]/span[1]
     print("Inside scrape_flights")
     soup = BeautifulSoup(driver.page_source,"html.parser")
-    flights = soup.findall("li")
-    print("Number of flights scraped: " + len(flights))
-    for i in flights:
-        print(i)
-    
+    flights_info_raw = soup.find_all(
+        "li", {
+            "class": "gws-flights-results__result-item gws-flights__flex-box gws-flights-results__collapsed"
+            }
+    ) # list of flights
+
+    flights_columns = ["from", "to", "departure_date", "arrival_date", "price_roundtrip", "duration", "n_stops"]
+    flights_info_clean = list()
+
+    for flight in flights_info_raw:
+        airports = flight.find(
+        "div",{"class": "gws-flights-results__airports flt-caption"})
+        from_airport = airports.find_all("span")[0].text
+        to_airport = airports.find_all("span")[1].text
+
+        times = flight.find("div",{"class":"gws-flights-results__times"}).find_all("span")
+        times = str(times)
+        pattern_time = r"[0-1]?[0-9]:[0-6][0-9] [AP]M"
+        times = re.findall(pattern_time,times)
+        departure_date = times[0] # returns departure time for now, will add datetime
+        arrival_date = times[-1] # returns arrival time for now, will add datetime
+
+        # price_roundtrip = flight.find(
+        # "div",{"class": "gws-flights-results__price"}).text
+        price_roundtrip = re.findall(r"\$[1-2]?,?[0-9]{1,3}",str(flight))[0]
+
+        duration = flight.find(
+        "div",{"class": "gws-flights-results__duration"}).text
+
+        n_stops = flight.find(
+        "div",{"class": "gws-flights-results__stops"}).find(
+            "span").text
+
+        flights_info_clean.append([from_airport,to_airport,departure_date,
+        arrival_date,price_roundtrip,duration,n_stops])
+
+    print(pd.DataFrame(flights_info_clean,columns=flights_columns))
 
 
 
-# to-do: Proxy implementation
-# function 1: scrape list of proxies from https://free-proxy-list.net/
 def scrape_proxy(website = "https://free-proxy-list.net/"):
     '''
-    Returns a list of free proxies found on defined website
+    Returns a list of free proxies found on website variable
     '''
     driver = webdriver.Firefox()
     driver.get(website)
@@ -121,8 +150,11 @@ def scrape_proxy(website = "https://free-proxy-list.net/"):
     driver.close()
     return proxy_list
 
-# proxies = scrape_proxy() eventually we will save this proxies before calling search_flights and use them
+
+
 ### Open browser instance and Google Flights - driver is global variable so we can access from different functions -> create class instead?
+# proxies = scrape_proxy() 
+# connect using proxy
 driver = webdriver.Firefox()
 driver.get("https://www.google.com/flights")
 
@@ -134,4 +166,3 @@ scrape_flights()
 
 ### Close browser
 driver.close()
-
