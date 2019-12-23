@@ -1,4 +1,4 @@
-### Web Scraper - Looking for Error Fares
+# Web Scraper - Looking for Error Fares
 
 Caution: This script is not usable yet - Development stage pre-pre-alpha ;)
 
