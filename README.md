@@ -6,10 +6,10 @@ I am excited to be part of the Github community and participate in data science 
 
 |Summary of Projects|
 |---|
-|[Web Scraper: Cheap Flights](webscraper_cheapflights/scraper.py) <br>*Web scraping, data cleaning, data analysis*|
-|[Handwritten Digits Classifier](handwritten_digits_classifier/digit_classifier.ipynb) <br>*Machine learning, neural networks*|
-|[Investigating Airplane Accidents](investigating_airplane_accidents/read.py) <br>*Data cleaning, data structures, data analysis*|
+|[Web Scraper: Cheap Flights](webscraper_cheapflights/scraper.py) -under construction <br>*Web scraping, data cleaning, automation, data analysis*|
+|[Inverstigating Airplane Accidents](investigating_airplane_accidents/aviation_analysis.ipynb) -under construction <br>*Data cleaning, data visualization*|
 |[Loan Repayment Predictor](loan_payment_predictor/loan_payment_predictor.ipynb)<br>*Data cleaning, machine learning*|
+|[Handwritten Digits Classifier](handwritten_digits_classifier/digit_classifier.ipynb) <br>*Machine learning, neural networks, computer vision*|
 |[Predicting Hacker News Upvotes](natural_language_processing_predicting_upvotes/predicting_upvotes.ipynb)<br>*Natural language processing, machine learning*|
 |[Predicting Bike Rentals](predicting_bike_rentals/predicting_bike_rentals.ipynb)<br>*Data cleaning, machine learning*|
 |[Predicting House Prices](LR_predicting_house_sale_prices/LR_house_prices.ipynb)<br>*Machine learning*|
