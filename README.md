@@ -2,6 +2,8 @@
 
 Hello!
 
+In this repository I will be adding some of my data science and data analysis projects. Feel free to fork this repo if you are learning data science and to give me any suggestions to improve my code!
+
 I am excited to be part of the Github community and participate in data science projects that will cause an impact in society. 
 
 |Summary of Projects|
