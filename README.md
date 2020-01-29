@@ -8,6 +8,7 @@ I am excited to be part of the Github community and participate in data science 
 
 |Summary of Projects|
 |---|
+|[Spam Filter](spam_filter/spam_filter.ipynb) -under construction <br>*Data cleaning, machine learning*|
 |[Web Scraper: Cheap Flights](webscraper_cheapflights/scraper.py) -under construction <br>*Web scraping, data cleaning, automation, data analysis*|
 |[Inverstigating Airplane Accidents](investigating_airplane_accidents/aviation_analysis.ipynb) -under construction <br>*Data cleaning, data visualization*|
 |[Loan Repayment Predictor](loan_payment_predictor/loan_payment_predictor.ipynb)<br>*Data cleaning, machine learning*|
