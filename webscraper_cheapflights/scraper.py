@@ -13,7 +13,10 @@ import pandas as pd # data processing
 import numpy as np 
 from selenium import webdriver # web scraping and browser interactions (DOM)
 from selenium.webdriver.common.keys import Keys # browser interactions using keyboard keys
+from selenium.webdriver.common.proxy import Proxy, ProxyType # for the use of proxies
 from bs4 import BeautifulSoup # web scraping static after page loads (static)
+import requests
+from lxml.html import fromstring
 import re # regular expressions
 # missing: email management modules
 
@@ -149,35 +152,23 @@ def scrape_flights():
 
 
 
-def scrape_proxy(website = "https://free-proxy-list.net/"):
+def scrape_proxy(url = "https://free-proxy-list.net/"):
     '''
     Returns a list of free proxies found on website variable
     '''
-    driver = webdriver.Firefox()
-    driver.get(website)
-    xpath='/html/body/section[1]/div/div[2]/div/div[2]/div/table/tbody'
-    rows = driver.find_elements_by_xpath(xpath)
-    rows_text = [element.text for element in rows]
-    proxy_list = re.findall('[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}',''.join(rows_text))
-    sleep(1)
-    driver.close()
-    return proxy_list
-
-
-
-### Open browser instance and Google Flights - driver is global variable so we can access from different functions -> create class instead?
-# proxies = scrape_proxy() 
-# connect using proxy
-
-firefox_profile = webdriver.FirefoxProfile()
-firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
-driver = webdriver.Firefox(firefox_profile=firefox_profile)
-
-driver.get("https://www.google.com/flights")
-
+    response = requests.get(url)
+    parser = fromstring(response.text)
+    proxies = set()
+    for i in parser.xpath('//tbody/tr')[:10]: # look at first 10 proxies
+        if i.xpath('.//td[7][contains(text(),"yes")]'):
+            proxy = ":".join([i.xpath('.//td[1]/text()')[0], i.xpath('.//td[2]/text()')[0]])
+            proxies.add(proxy)
+    print("Set of poxies scraped: {}".format(proxies))
+    return proxies
 
 ### Input: This will eventually go in a different script, having list-like objects with dates and cities
 ## Input dates in datetime format for future automation, this will allow us to iterate over different dates
+
 flight_input = {
     "from_date" : datetime(
         year = 2020,
@@ -192,6 +183,36 @@ flight_input = {
     ),
     "to_city":"Barcelona"
 }
+
+
+### Open browser instance and Google Flights - driver is global variable so we can access from different functions -> create class instead?
+proxies = scrape_proxy() 
+# connect using proxy
+connected = False
+
+while connected == False:
+    PROXY = proxies.pop()
+
+    prox = Proxy()
+    prox.proxy_type = ProxyType.MANUAL
+    prox.http_proxy = PROXY
+    # prox.socks_proxy = PROXY , fix socks proxy
+    prox.ssl_proxy = PROXY
+    print("Changing IP to {}".format(PROXY)) # add from original IP
+    capabilities = webdriver.DesiredCapabilities.FIREFOX
+    prox.add_to_capabilities(capabilities)
+
+
+    firefox_profile = webdriver.FirefoxProfile()
+    firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
+
+    driver = webdriver.Firefox(desired_capabilities=capabilities,firefox_profile=firefox_profile)
+    print("Driver capabilities loaded")
+    try:
+        driver.get("https://www.google.com/flights")
+        connected = True
+
+
 
 ### Web interaction
 search_flights(flight_input)
