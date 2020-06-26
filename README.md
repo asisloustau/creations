@@ -9,7 +9,7 @@ I am excited to be part of the Github community and participate in data science 
 |Summary of Projects|
 |---|
 |[Portfolio Website - asisloustau.com](https://www.asisloustau.com/)<br>__Keywords__: *Web Development, Django, HTML, CSS, Javascript*|
-|[Discussion Boards](https://www.asisloustau.com/boards/)<br>__Keywords__: *Web Development, Django, HTML, CSS, Javascript*|
+|[Discussion Boards](https://www.asisloustau.com/boards/)<br>Based on Vitor Freitas' amazing [Django Beginner Series Tutorial](https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/0<br>__Keywords__: *Web Development, Django, HTML, CSS, Javascript*|
 |[Amazon Sales Processing Report](process_Amazon_sales/)<br>This Python app was made especifically for one of my clients who needed a quick way to process their Amazon sales monthly reports from different countries. This app outputs an Excel spreadsheet with one tab per processed csv file automatically.<br>__Keywords__: *Data Cleaning, Data Processing, Process Automation, Amazon Reporting*|
 |[Spam Filter](spam_filter/spam_filter.ipynb) -under construction -**[NBViewer](http:/nbviewer.jupyter.org/github/asisloustau/portfolio_projects/blob/master/spam_filter/spam_filter.ipynb)**<br>A simple SMS spam filter created using a multinomial Naive Bayes algorithm. In order to determine whether an SMS is spam, the word counts of the relevant terms are used and compared.<br>__Keywords__: *Data Cleaning, Machine Learning, Natural Language Processing*|
 |[Web Scraper: Cheap Flights](webscraper_cheapflights/scraper.py) -under construction <br>A tool to scrape flight data automatically from different sources to find cheap flights and error fares.<br>__Keywords__: *Web Scraping, Data Cleaning, Automation, Data Analysis, Networks*|
